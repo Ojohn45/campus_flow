@@ -16,6 +16,7 @@ class TestTicket(unittest.TestCase):
             category="technical",
             priority="high",
         )
+        
 
     def test_ticket_creation(self):
         """A ticket should be created with valid information."""

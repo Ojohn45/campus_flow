@@ -15,6 +15,7 @@ code easier to understand, test, and maintain.
 
 The project uses the following structure:
 
+
 ```text
 Campusflow/
 ├── Tickets.py

@@ -11,6 +11,7 @@ from typing import Any
 from uuid import uuid4
 
 
+
 # Allowed ticket categories
 VALID_CATEGORIES = {
     "maintenance",

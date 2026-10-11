@@ -8,8 +8,7 @@ from campusflow import storage
 from campusflow.reports import get_work_queue, build_report, format_report
 from campusflow.workflow import assign_ticket, change_status, reopen_ticket, find_ticket
 
-# --- Placeholders for Engineer A's functions ---
-# Replace these imports with A's real module once merged.
+
 try:
     from campusflow.tickets import create_ticket, list_tickets
 except ImportError:

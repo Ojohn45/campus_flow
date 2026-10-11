@@ -1,3 +1,4 @@
+### Engineer A — Creation, validation, priority, storage
 # campus_flow
 
 ---
@@ -14,7 +15,6 @@ Copy this into the file named `Readme` (without adding a `.txt` extension):
 ## 1. Project Overview
 
 CampusFlow is a campus-related software project.
-
 
 This part of the project implements the ticket management and
 storage components.
@@ -48,6 +48,45 @@ The current implementation supports:
 - Automated unit testing.
 
 ## 3. Project Structure
+
+### Engineer B — Assignment, workflow, queue, reports
+
+- **F3 — Assign**: assigns a ticket to a non-empty staff member name; rejects
+  unknown ticket IDs and blank/whitespace-only names.
+- **F4 — Workflow**: enforces the state machine `open → in_progress → resolved`.
+  - An **unassigned** ticket cannot move to `in_progress`.
+  - `open → resolved` (skipping `in_progress`) is rejected.
+  - A `resolved` ticket can only be modified after an explicit **reopen**
+    (`resolved → open`).
+- **F5 — Work queue**: lists open, unresolved tickets ordered
+  `critical → high → medium → low`, with ties broken by the **numeric** ticket
+  ID (so `T002` comes before `T010`).
+- **F6 — Reports**: total ticket count plus breakdowns by status and priority.
+  Handles zero tickets correctly.
+- **CLI menu**: wires all seven features into a looping menu with friendly
+  `✔` / `✘` feedback and a top-level error guard so one bug cannot crash the app.
+
+### Shared
+
+- **F2 — List / view**: list all tickets and display the full details of one.
+
+---
+
+## Requirements
+
+- Python 3.10 or newer (developed on 3.12)
+- No third-party packages — standard library only (`json`, `unittest`)
+
+---
+
+## Setup
+
+Clone the repository:
+
+```bash
+git clone <repository-url>
+cd campus_flow
+
 
 ```text
 Campusflow/

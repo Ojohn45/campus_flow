@@ -1,1 +1,10 @@
-[]
+[
+    {
+        "id": "T001",
+        "title": "Laptop not working",
+        "category": "maintenance",
+        "priority": "medium",
+        "status": "open",
+        "assigned_to": "John"
+    }
+]

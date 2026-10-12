@@ -264,3 +264,73 @@ class Ticket:
             f"status={self.status!r}, "
             f"priority={self.priority!r})"
         )
+
+"""Engineer A — Create and List tickets (F1 + F2)."""
+
+VALID_PRIORITIES = ["low", "medium", "high", "critical"]
+VALID_CATEGORIES = ["technical", "maintenance", "academic", "security", "administration", "other"]
+
+
+def _next_id(tickets):
+    """Generate the next ticket ID like T001, T002 etc."""
+    if not tickets:
+        return "T001"
+    nums = []
+    for t in tickets:
+        try:
+            nums.append(int(t["id"].lstrip("T")))
+        except ValueError:
+            pass
+    return f"T{max(nums) + 1:03d}"
+
+
+def create_ticket(tickets):
+    """F1 — Create a new ticket interactively."""
+    print("\n────── Create Ticket ──────")
+
+    # Title
+    title = input("Title: ").strip()
+    if not title:
+        print("✘ Title cannot be empty.")
+        return
+
+    # Category
+    print(f"Categories: {' | '.join(VALID_CATEGORIES)}")
+    category = input("Category: ").strip().lower()
+    if category not in VALID_CATEGORIES:
+        print(f"✘ Invalid category: '{category}'")
+        return
+
+    # Priority
+    print(f"Priorities: {' | '.join(VALID_PRIORITIES)}")
+    priority = input("Priority: ").strip().lower()
+    if priority not in VALID_PRIORITIES:
+        print(f"✘ Invalid priority: '{priority}'")
+        return
+
+    # Build the ticket
+    ticket = {
+        "id": _next_id(tickets),
+        "title": title,
+        "category": category,
+        "priority": priority,
+        "status": "open",
+        "assigned_to": None,
+    }
+
+    tickets.append(ticket)
+    print(f"✔ Ticket {ticket['id']} created successfully!")
+
+
+def list_tickets(tickets):
+    """F2 — List all tickets."""
+    print("\n────── All Tickets ──────")
+    if not tickets:
+        print("  No tickets found.")
+        return
+    print(f"  {'ID':<8}{'PRIORITY':<12}{'STATUS':<14}{'ASSIGNED':<14}{'TITLE'}")
+    print(f"  {'─'*8}{'─'*12}{'─'*14}{'─'*14}{'─'*20}")
+    for t in tickets:
+        assigned = t.get("assigned_to") or "—"
+        print(f"  {t['id']:<8}{t['priority']:<12}{t['status']:<14}{assigned:<14}{t['title']}")
+    print(f"\n  Total: {len(tickets)} ticket(s)")
